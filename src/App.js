@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import marked from 'marked';
-import './App.css';
 
 // ALLOWS LINE BREAKS WITH RETURN BUTTON
 marked.setOptions({
+  gfm: true,
   breaks: true,
+  renderer: new marked.Renderer()
 });
 
 // INSERTS target="_blank" INTO HREF TAGS (required for codepen links)
 const renderer = new marked.Renderer();
 renderer.link = function (href, title, text) {
-  return `<a target="_blank" href="${href}">${text} </a>`;
+  return `<a target="_blank" href="${href}">${text}</a>`;
 }
 
-class App extends Component{
+class App extends React.Component{
   constructor(props) {
     super(props);
     this.state =  {
