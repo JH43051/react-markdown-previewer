@@ -1,18 +1,7 @@
 import React from 'react';
-import marked from 'marked';
-
-// ALLOWS LINE BREAKS WITH RETURN BUTTON
-marked.setOptions({
-  gfm: true,
-  breaks: true,
-  renderer: new marked.Renderer()
-});
-
-// INSERTS target="_blank" INTO HREF TAGS (required for codepen links)
-const renderer = new marked.Renderer();
-renderer.link = function (href, title, text) {
-  return `<a target="_blank" href="${href}">${text}</a>`;
-}
+import Preview from './components/Preview';
+import Toolbar from './components/Toolbar';
+import Editor from './components/Editor';
 
 class App extends React.Component{
   constructor(props) {
@@ -70,40 +59,16 @@ class App extends React.Component{
             icon={classes[2]} 
             onClick={this.handlePreviewMaximize}
             text="Previewer"/>
-          <Preview  markdown={this.state.markdown}/>
+          <Preview markdown={this.state.markdown}/>
         </div>
       </div>
     )
   }
 };
 
-const Toolbar = (props) => {
-    return (
-      <div className="toolbar">
-        <i title="no-stack-dub-sack" className="fa fa-free-code-camp"/>      
-        {props.text}
-        <i onClick={props.onClick} className={props.icon}></i>
-      </div>
-   )
-}
-
-const Editor = (props) => {
-  return (
-    <textarea id="editor"
-      value={props.markdown}
-      onChange={props.onChange}
-      type="text"/>
-    )
-}
-
-const Preview = (props) => {
-  return (
-      <div id='preview' dangerouslySetInnerHTML={{__html: marked(props.markdown, { renderer: renderer })}} />
-    )
-}
-
 const placeholder = 
-`# Welcome to my React Markdown Previewer!
+`
+# Welcome to my Markdown Previewer!
 
 ## This is a sub-heading...
 ### And here's some other cool stuff:
@@ -147,7 +112,7 @@ And here. | Okay. | I think we get it.
 - Even if you use dashes or asterisks.
 * And last but not least, let's not forget embedded images:
 
-![React Logo w/ Text](https://goo.gl/Umyytc)
+![React Logo](https://pbs.twimg.com/profile_images/446356636710363136/OYIaJ1KK_400x400.png)
 `
 
 export default App;
